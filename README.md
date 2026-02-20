@@ -1,8 +1,8 @@
-# LLM Architecture Patterns — Démos Python
+# 🧠 LLM Architecture Patterns — Démos Python
 
 Une collection de démos Python illustrant les principaux patterns d'architecture pour applications LLM. Chaque pattern est une démo indépendante, prête à exécuter.
 
-## Vue d'ensemble des patterns
+## 📊 Vue d'ensemble des patterns
 
 | # | Pattern | Définition | Avantages | Inconvénients | Appels LLM |
 |---|---------|-----------|-----------|---------------|------------|
@@ -16,7 +16,7 @@ Une collection de démos Python illustrant les principaux patterns d'architectur
 | 8 | **Evaluator-Optimizer** | Comme Reflection, mais avec une évaluation quantitative (score). On boucle tant que le score n'atteint pas un seuil défini. | Critère d'arrêt objectif (score ≥ seuil). Optimisation mesurable et reproductible. | Concevoir un bon scoring est difficile. Risque de sur-optimisation sur le score plutôt que la qualité réelle. | 1 + 2×N |
 | 9 | **Prompt Chaining** | Enchaîne plusieurs appels LLM en séquence, chaque étape transformant la sortie de la précédente (pipeline). | Chaque étape est simple et testable indépendamment. Facile à debugger. | Latence cumulative (chaque étape attend la précédente). Une erreur se propage dans tout le pipeline. | N étapes |
 
-## Quel pattern choisir ?
+## 🔀 Quel pattern choisir ?
 
 ```
 Ta tâche est simple ?
@@ -47,11 +47,14 @@ Tu as une séquence de transformations à appliquer ?
   └─ OUI → Prompt Chaining
 ```
 
-## Structure du repo
+## 📁 Structure du repo
 
 ```
-patterns-agentic-ia/
-├── README.md                      ← ce fichier
+llm-architecture-patterns/
+├── README.md
+├── .env.example
+├── .gitignore
+├── requirements.txt
 ├── 01_chain_of_thought/
 │   ├── README.md
 │   ├── no_cot_baseline.py
@@ -73,28 +76,21 @@ patterns-agentic-ia/
 │   ├── agents.py
 │   ├── router.py
 │   └── main.py
-├── 05_reflection/
-│   ├── README.md
-│   ├── reflection_agent.py
-│   └── main.py
-├── 06_orchestrator_workers/
-│   └── (à venir)
-├── 07_map_reduce/
-│   └── (à venir)
-├── 08_evaluator_optimizer/
-│   └── (à venir)
-└── 09_prompt_chaining/
-    └── (à venir)
+└── 05_reflection/
+    ├── README.md
+    ├── reflection_agent.py
+    └── main.py
 ```
 
-## Démarrage rapide
+## 🚀 Démarrage rapide
 
 ```bash
 # 1. Cloner le repo
 git clone https://github.com/<ton-username>/llm-architecture-patterns.git
+cd llm-architecture-patterns
 
 # 2. Installer les dépendances
-pip install openai python-dotenv
+pip install -r requirements.txt
 
 # 3. Configurer la clé API
 cp .env.example .env
@@ -105,7 +101,13 @@ cd 01_chain_of_thought
 python compare.py
 ```
 
-## Références
+## ⚠️ Notes
+
+- Toutes les démos utilisent l'API OpenAI (`gpt-4o-mini`) — modèle rapide et économique.
+- Le fichier `.env` est à la **racine** du repo. Chaque script le charge avec `python-dotenv`.
+- Les outils dans `02_react` et `03_function_calling` sont **simulés** (pas de vraie recherche web) pour que les démos tournent sans clé API supplémentaire.
+
+## 📚 Références
 
 | Pattern | Paper / Source |
 |---------|---------------|
